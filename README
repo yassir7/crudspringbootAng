@@ -1,0 +1,26 @@
+
+
+
+
+Script para crear la Base de dato y las tablas en mysql.
+
+
+CREATE TABLE rol(
+    id_rol INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(35) NOT NULL,
+    PRIMARY KEY (id_rol)
+);
+
+CREATE TABLE usuario(
+    id_usuario INT NOT NULL AUTO_INCREMENT,
+    id_rol INT,
+    nombre VARCHAR(50) NOT NULL,
+    activo CHAR(1) DEFAULT('A'),
+    PRIMARY KEY (id_usuario),
+    INDEX roluser (id_rol),
+    FOREIGN KEY(id_rol) REFERENCES rol(id_rol)
+);
+
+INSERT INTO rol VALUES(null, 'ADMINISTRADOR'),
+(null,'AUDITOR'),
+(null, 'AUXILIAR');
