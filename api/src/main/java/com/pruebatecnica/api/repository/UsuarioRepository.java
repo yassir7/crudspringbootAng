@@ -10,10 +10,10 @@ import com.pruebatecnica.api.model.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
 
-	@Query(value = "SELECT * FROM usuario WHERE nombre LIKE LOWER('%?1%') ORDER BY LOCATE('?1', nombre) ASC, nombre ASC", nativeQuery = true)
+	@Query(value = "SELECT * FROM usuario WHERE nombre LIKE CONCAT('%',LOWER( ?1 ), '%') ORDER BY LOCATE( ?1 , nombre) ASC, nombre ASC", nativeQuery = true)
 	public List<Usuario> findLikeNombre(String nombre);
 	
 	public List<Usuario> findByNombre(String nombre);
 	
-	public List<Usuario> findAllByOrderByNombreAsc();
+	public List<Usuario> findAllByOrderByIdAsc();
 }
