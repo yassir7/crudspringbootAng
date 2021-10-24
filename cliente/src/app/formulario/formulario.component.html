@@ -1,0 +1,65 @@
+<div class="card" *ngIf="usuarioSelected">
+  <div class="card-header">Informacion del usuario</div>
+  <div class="card-body">
+    <div class="d-grid gap-2 d-md-block">
+      <button
+        class="btn btn-primary"
+        *ngIf="usuarioSelected.id < 1"
+        (click)="guardar()"
+      >
+        Guardar
+      </button>
+      <button
+        class="btn btn-primary"
+        *ngIf="usuarioSelected.id > 1"
+        (click)="editar()"
+      >
+        Editar
+      </button>
+      <button
+        class="btn btn-primary"
+        *ngIf="usuarioSelected.id > 1"
+        (click)="eliminar()"
+      >
+        Eliminar
+      </button>
+    </div>
+    <div class="row g-2">
+      <div class="col-md-12">
+        <label for="id">Id: {{ usuarioSelected.id }} </label>
+      </div>
+      <div class="col-md-12">
+        <label for="nombre">Nombre:</label>
+        <input [(ngModel)]="usuarioSelected.nombre" type="text" id="nombre" />
+      </div>
+      <div class="col-md-12">
+        <label for="rol">Rol</label>
+        <select name="rol" id="rol" [(ngModel)]="usuarioSelected.rol.id">
+          <option value="-1">Seleccione un rol ...</option>
+          <option *ngFor="let rol of roles" value="{{ rol.id }}">
+            {{ rol.nombre }}
+          </option>
+        </select>
+      </div>
+      <div class="col-md-12">
+        <label for="activo">Activo</label>
+        <input
+          [(ngModel)]="usuarioSelected.activo"
+          checked="{{ usuarioSelected.activo == 'S' ? 'checked' : '' }}}"
+          type="radio"
+          name="radio"
+          value="S"
+        />
+        Si -
+        <input
+          [(ngModel)]="usuarioSelected.activo"
+          checked="{{ usuarioSelected.activo == 'N' ? 'checked' : '' }}}"
+          type="radio"
+          name="radio"
+          value="N"
+        />
+        No
+      </div>
+    </div>
+  </div>
+</div>
