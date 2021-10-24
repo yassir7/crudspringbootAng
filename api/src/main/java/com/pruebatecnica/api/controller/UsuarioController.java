@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ import com.pruebatecnica.api.repository.UsuarioRepository;
 
 @RestController
 @RequestMapping("/api/usuario")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UsuarioController {
 
 	@Autowired
@@ -30,7 +32,7 @@ public class UsuarioController {
 	@GetMapping
 	public ResponseEntity<List<Usuario>> listar() {
 		try {
-			return ResponseEntity.ok(usuarioRepository.findAllByOrderByNombreAsc());
+			return ResponseEntity.ok(usuarioRepository.findAllByOrderByIdAsc());
 		}catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.internalServerError().build();
@@ -66,12 +68,12 @@ public class UsuarioController {
 	@PutMapping
 	public ResponseEntity<Usuario> actualizar(@RequestBody UsuarioDTO usuario) {
 		try {
-			if(usuarioRepository.findByNombre(usuario.getNombre()).size() > 0) {
-				return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).build();
-			}
-			else {
+			if(usuarioRepository.existsById(usuario.getId()) ) {
 				usuarioRepository.save(UsuarioMapper.usuarioDTOToUsuario(usuario));
 				return ResponseEntity.ok().build();
+			}
+			else {
+				return ResponseEntity.notFound().build();
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -79,10 +81,10 @@ public class UsuarioController {
 		}
 	}
 	
-	@DeleteMapping
-	public ResponseEntity<Usuario> borrar(@RequestBody UsuarioDTO usuario) {
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Usuario> borrar(@PathVariable("id") int id) {
 		try {
-			usuarioRepository.deleteById(usuario.getId());
+			usuarioRepository.deleteById(id);
 			return ResponseEntity.ok().build();
 		}
 		catch (Exception e) {
