@@ -20,7 +20,7 @@ Script para crear la Base de dato y las tablas en mysql.
 
 nombre de la base de datos: codesaprueba
 
-`CREATE TABLE rol(
+`CREATE TABLE rol(`
     id_rol INT NOT NULL AUTO_INCREMENT,
     nombre VARCHAR(35) NOT NULL,
     PRIMARY KEY (id_rol)
@@ -38,4 +38,4 @@ CREATE TABLE usuario(
 
 INSERT INTO rol VALUES(null, 'ADMINISTRADOR'),
 (null,'AUDITOR'),
-(null, 'AUXILIAR');`
+`(null, 'AUXILIAR');`
