@@ -4,20 +4,20 @@ En este repositorio encontrará dos carpetas:
 * api: es el proyecto en java springboot.
 * cliente: cliente es el proyecto construido en angular.
 
-###Requerimiento
+### Requerimiento
 * Java 11 como minimo.
 * Servidor mysql.
 * maven.
 * Eclipse con el plugin spring, o Spring Tool Suit.
 
 
-###Configuracion y ejecucion.
+### Configuracion y ejecucion.
 para compilar el proyecto api utilice maven. Puede utilizar el IDE eclipse o Spring Tool Suit para compilar o ejecutar. Este levantará el servicio por el puerto 8080. Este proyecto conectará a una base de datos Mysql.
 para compilar el proyecto cliente utilice node.
 
 
 Script para crear la Base de dato y las tablas en mysql.
-
+nombre de la base de datos: codesaprueba
 
 CREATE TABLE rol(
     id_rol INT NOT NULL AUTO_INCREMENT,
