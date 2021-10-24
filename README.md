@@ -12,13 +12,13 @@ En este repositorio encontrará dos carpetas:
 
 
 ### Configuracion y ejecusión.
-para compilar el proyecto api utilice maven. Puede utilizar el IDE eclipse o Spring Tool Suit para compilar o ejecutar. Este levantará el servicio por el puerto 8080. Este proyecto conectará a una base de datos Mysql.
-para compilar el proyecto cliente utilice node.
+Para compilar el proyecto api utilice maven. Puede utilizar el IDE eclipse o Spring Tool Suit para compilar o ejecutar. Este levantará el servicio por el puerto 8080. Este proyecto conectará a una base de datos Mysql.
+Para compilar el proyecto cliente utilice node.
 
 
 Script para crear la Base de dato y las tablas en mysql.
 
-**nombre de la base de datos:** codesaprueba
+**Nombre de la base de datos:** codesaprueba
 
 ```sql
 CREATE TABLE rol(id_rol INT NOT NULL AUTO_INCREMENT,
