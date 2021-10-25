@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Rol } from 'app/models/rol';
 import { Usuario } from 'app/models/usuario';
+import { MensajeService } from 'app/servicio/mensaje.service';
 import { RolserviceService } from 'app/servicio/rolservice.service';
 import { UsuarioService } from 'app/servicio/usuario.service';
 
@@ -10,39 +12,74 @@ import { UsuarioService } from 'app/servicio/usuario.service';
   styleUrls: ['./formulario.component.css'],
 })
 export class FormularioComponent implements OnInit {
-  @Input() usuarioSelected: Usuario;
+  @Input() usuarioSelected?: Usuario;
 
   roles: Rol[];
   constructor(
     private usuarioService: UsuarioService,
-    private rolService: RolserviceService
+    private rolService: RolserviceService,
+    private mensajeService: MensajeService
   ) {}
 
   ngOnInit(): void {
     this.rolService.consultarRoles().subscribe((roles) => {
       this.roles = roles;
-      console.log(this.roles);
     });
   }
 
-  guardar(): void {
-    this.usuarioSelected.id_rol = this.usuarioSelected.rol.id;
-    this.usuarioService.agregar(this.usuarioSelected).subscribe((res) => {
-      this.cerrarFormulario();
-    });
+  guardar(usuario: Usuario): void {
+    this.usuarioService.agregar(usuario).subscribe(
+      (res) => {
+        this.mensajeService.agregarMensaje({
+          texto: `Usuario ${usuario.nombre} guardado.`,
+          tipo: 1,
+        });
+        this.cerrarFormulario();
+      },
+      (error) => {
+        this.mensajeService.agregarMensaje({
+          texto: 'No se pudo guardar. intente de nuevo.',
+          tipo: 2,
+        });
+      }
+    );
   }
 
-  editar(): void {
-    this.usuarioSelected.id_rol = this.usuarioSelected.rol.id;
-    this.usuarioService.actualizar(this.usuarioSelected).subscribe((res) => {
-      this.cerrarFormulario();
-    });
+  editar(usuario: Usuario): void {
+    this.usuarioService.actualizar(usuario).subscribe(
+      (res) => {
+        this.mensajeService.agregarMensaje({
+          texto: `Usuario ${usuario.nombre} ha sido modificado.`,
+          tipo: 1,
+        });
+        this.cerrarFormulario();
+      },
+      (error) => {
+        this.mensajeService.agregarMensaje({
+          texto: 'No se pudo editar. intente de nuevo.',
+          tipo: 2,
+        });
+      }
+    );
   }
 
   eliminar(): void {
-    this.usuarioService.eliminar(this.usuarioSelected).subscribe((res) => {
-      this.cerrarFormulario();
-    });
+    let nombre = this.usuarioSelected.nombre;
+    this.usuarioService.eliminar(this.usuarioSelected).subscribe(
+      (res) => {
+        this.mensajeService.agregarMensaje({
+          texto: `Se ha eliminado al Usuario ${nombre}.`,
+          tipo: 1,
+        });
+        this.cerrarFormulario();
+      },
+      (error) => {
+        this.mensajeService.agregarMensaje({
+          texto: 'No se pudo eliminar. intente de nuevo.',
+          tipo: 2,
+        });
+      }
+    );
   }
 
   private cerrarFormulario(): void {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'app/models/usuario';
+import { MensajeService } from 'app/servicio/mensaje.service';
 import { UsuarioService } from 'app/servicio/usuario.service';
 
 @Component({
@@ -11,7 +12,10 @@ export class ListaComponent implements OnInit {
   usuarios: Usuario[];
   usuarioSelected: Usuario;
 
-  constructor(private usuarioService: UsuarioService) {}
+  constructor(
+    private usuarioService: UsuarioService,
+    private mensajeService: MensajeService
+  ) {}
 
   ngOnInit(): void {
     this.getUsuarios(null);
@@ -22,12 +26,21 @@ export class ListaComponent implements OnInit {
   }
 
   getUsuarios(nombre: string): void {
-    this.usuarioService
-      .buscar(nombre)
-      .subscribe((res) => (this.usuarios = res));
+    this.usuarioService.buscar(nombre).subscribe(
+      (res) => {
+        this.usuarios = res;
+      },
+      (error) => {
+        this.mensajeService.agregarMensaje({
+          texto: 'Error al cargar la lista.',
+          tipo: 2,
+        });
+      }
+    );
   }
 
   crear(): void {
+    this.mensajeService.agregarMensaje(null);
     this.usuarioSelected = {
       id: -1,
       nombre: '',
