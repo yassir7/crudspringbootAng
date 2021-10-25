@@ -43,12 +43,4 @@ export class UsuarioService {
       this.httpOptions
     );
   }
-
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any) => {
-      console.log('hay un error', error);
-
-      return of(result as T);
-    };
-  }
 }
