@@ -26,9 +26,7 @@ export class UsuarioService {
 
   buscar(nombre: string): Observable<Usuario[]> {
     let url = nombre ? `${this.baseUrl}/buscar/${nombre}` : `${this.baseUrl}`;
-    return this.http
-      .get<Usuario[]>(url)
-      .pipe(catchError(this.handleError<Usuario[]>('buscar', [])));
+    return this.http.get<Usuario[]>(url);
   }
 
   actualizar(usuario: Usuario): Observable<any> {
