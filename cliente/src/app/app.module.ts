@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 import { ListaComponent } from './lista/lista.component';
 import { FormularioComponent } from './formulario/formulario.component';
+import { MensajeComponent } from './mensaje/mensaje.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { FormularioComponent } from './formulario/formulario.component';
     BusquedaComponent,
     ListaComponent,
     FormularioComponent,
+    MensajeComponent,
   ],
   imports: [BrowserModule, HttpClientModule, FormsModule],
   providers: [],
