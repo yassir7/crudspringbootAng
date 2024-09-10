@@ -1,64 +1,6 @@
 Cloner le dépôt : git clone <URL_du_dépôt>
-Créer une branche : git checkout -b <nom_de_branche>
-Vérifier l'état : git status
-Ajouter les fichiers modifiés : git add .
-Créer un commit : git commit -m "Message descriptif"
-Pousser la branche : git push origin <nom_de_branche>
-Récupérer les dernières modifications : git fetch origin
-Rebaser sur la branche principale : git rebase origin/main
-Résoudre les conflits : git add <fichier_conflit> puis git rebase --continue
-Pousser après un rebase : git push origin <nom_de_branche> --force-with-lease
-Créer une Pull Request
-Supprimer la branche : git branch -d <nom_de_branche> et git push origin --delete <nom_de_branche>
 
 
-Exécutez la commande suivante pour lister toutes les branches distantes disponibles : git branch -r
-Assurez-vous que vous êtes sur la branche correcte : git branch
-
-https://chatgpt.com/c/d5b3dc8f-0ca5-4cd7-9906-9544d403d2cc
-
-
-Résumé
-Clonage du Dépôt : git clone
-Création de Branches : git checkout -b <branch>
-Développement et Commit : git add, git commit
-Rebase sur develop : git rebase develop
-Pousser les Modifications : git push origin <branch>
-Fusion via Pull Request : Sur GitHub
-Fusion dans main : git merge develop puis git push
-
-
-Projet : Développement d'une application web pour la gestion des tâches.
-
-Branches principales :
-main : Branche principale contenant le code de production.
-develop : Branche de développement pour les nouvelles fonctionnalités.
-
-
-Développeurs :
-Alice - Développeur frontend                        Bob - Développeur backend
-git checkout -b feature/frontend-dashboard 	    git checkout -b feature/backend-api
-git add .					    git add .
-git commit -m "Ajout du tableau de bord frontend"   git commit -m "Ajout de l'API pour la gestion des tâches"
-git checkout develop				    git checkout develop			    
-git pull origin develop				    git pull origin develop
-git checkout feature/frontend-dashboard		    git checkout feature/backend-api
-git rebase develop				    git rebase develop
-git add <fichiers_conflictuels>
-git rebase --continue	
-git push origin feature/frontend-dashboard	    git push origin feature/backend-api
-
-					    
-				Fusion de develop dans main
-				git checkout main
-				git pull origin main
-				git merge develop
-				git push origin main
-
-
-gitk --all  gitk est une interface graphique qui vous permet de visualiser l'historique des commits de manière graphique 
-
-git shortlog La commande git shortlog fournit un résumé des contributions par auteur :
 
 
 
