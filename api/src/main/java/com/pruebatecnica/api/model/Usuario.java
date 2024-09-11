@@ -10,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class usuarIO {
+public class UserPartido {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
